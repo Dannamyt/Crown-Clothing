@@ -19,6 +19,7 @@ function SignUp(){
     function resetFormFields(){
         setFormFields(defaultFormFields)
     }
+
     async function handleSubmit(event){
         event.preventDefault()
         if(password !== confirmPassword) return;
@@ -36,6 +37,7 @@ function SignUp(){
     function handleChange(event){
         const{name,value}  = event.target
         setFormFields({...formFields,[name]:value})
+        
     }
     
     return(
@@ -44,11 +46,8 @@ function SignUp(){
             <h1>Sign up with your email and password</h1>
             <form action="" onSubmit={handleSubmit}>
                 <FormInput label={'Display Name'} type="text" onChange={handleChange} required name="displayName" value={displayName}/>
-                
                 <FormInput label={'Email'} type="email" onChange={handleChange} required name="email" value={email}/>
-                
                 <FormInput label ={'Password'} type="password" onChange={handleChange} required name="password" value={password}/>
-                
                 <FormInput label={'Confirm Password'} type="password" onChange={handleChange} required name="confirmPassword" value={confirmPassword}/>
                 <Button type='submit'>Sign Up</Button>
             </form>
