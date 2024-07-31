@@ -4,14 +4,17 @@ import { getAuth,
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
-    
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
+      
 } from "firebase/auth";
 import { 
   getFirestore,
   doc,
   getDoc,
-  setDoc } from "firebase/firestore";
+  setDoc ,
+} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDQSpKkV7xCm4VT07GLGN6txcybbPdo0hE",
@@ -29,7 +32,7 @@ const firebaseConfig = {
     prompt: 'select_account'
   })
 
-  export const auth = getAuth()
+  export const auth = getAuth(firebaseApp)
   export const signInWithGooglePopup = () => signInWithPopup(auth,provider)
   export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider)
   export const db = getFirestore()
@@ -73,3 +76,8 @@ export const userLogInAuth = async (userAuth,addInfos)=>{
   const useDocRef = doc(db,'users',userAuth.uid)
   console.log(useDocRef)
 }
+
+export const signOutUser= async()=> await signOut(auth)
+
+export const onAuthStateChangedListener =(callback)=> 
+  onAuthStateChanged(auth,callback)

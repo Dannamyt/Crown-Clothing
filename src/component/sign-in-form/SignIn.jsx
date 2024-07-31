@@ -3,7 +3,8 @@ import { createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils"
 import { signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
 import FormInput from "../../component/form-input/FormInput"
 import Button from "../../component/button/Button"
-import { useState } from "react"
+import {  useState } from "react"
+// import { UserContext } from "../../context/user.context"
 
 
 
@@ -16,19 +17,25 @@ function SignIn(){
   
     const [userLogin,setUserLogin] = useState(defaultLogIn)
     const{email,password} = userLogin
+
+    // const {setCurrentUser} = useContext(UserContext)
     
     const signInWithGoogle = async()=>{
-        const {user} = await signInWithGooglePopup()
-       await createUserDocumentFromAuth(user)
+        await signInWithGooglePopup()
     }
-    
+    function resetFormField(){
+        setUserLogin(defaultLogIn)
+    }
     async function handleSubmit(event){
         event.preventDefault()
         if(!password) return;
 
         try{
-            const response = await signInUserWithEmailAndPassword(email,password)
-            console.log(response)
+             await signInUserWithEmailAndPassword(email,password)
+
+            // setCurrentUser(user)
+            resetFormField()
+
         }
         catch(error){
             console.log('user cant login'+error.message)
