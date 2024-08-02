@@ -5,3 +5,7 @@ a{
     text-decoration: none;
     color: black;
 }
+body{
+    padding: 20px 40px;
+    margin: 0;
+}
