@@ -2,7 +2,7 @@ import { signInWithGooglePopup } from "../../utils/firebase/firebase.utils"
 import { createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils"
 import { signInUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils"
 import FormInput from "../../component/form-input/FormInput"
-import Button from "../../component/button/Button"
+import Button, {BUTTON_TYPE_CLASSES} from "../../component/button/Button"
 import {  useState } from "react"
 
 
@@ -56,7 +56,7 @@ function SignIn(){
                 <FormInput label={'Password'} type='password' name='password' required onChange={handleLogInChange} value={password} />
                 <div className="button-containers" style={{display:'flex',gap:'10px'}}>
                     <Button type='submit'>Sign In</Button>
-                    <Button type='button' buttonType="google" onClick={signInWithGoogle}>Sign in with Google</Button>
+                    <Button type='button' buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>Sign in with Google</Button>
                 </div>
                  </form>
         </div>

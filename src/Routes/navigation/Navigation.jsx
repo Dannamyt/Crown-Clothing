@@ -1,5 +1,5 @@
-import { Outlet,Link } from "react-router-dom"
-import './navigation.styles.scss'
+import { Outlet } from "react-router-dom"
+import{NavigationContainer,NavLinks,NavLink,LogoContainer} from './navigation.styles.jsx'
 import Logo from "../../Logo"
 import CartIcon from "../../component/cart-icon/cart-icon.component"
 import CartDropdown from "../../component/cart-dropdown/cart-dropdown.component"
@@ -15,19 +15,19 @@ function Navigation(){
     return(
         <>
             <div>
-                <div className="navigation">
-                    <Link className="logo-container" to={'/'}>
+                <NavigationContainer >
+                    <LogoContainer className="logo-container" to={'/'}>
                         <Logo className='logo'/>
-                    </Link>
-                        <div className="nav-links-container">
-                            <Link className="nav-link" to='shop'>Shop</Link>
+                    </LogoContainer>
+                        <NavLinks >
+                            <NavLink  to='shop'>Shop</NavLink>
                 
-                            {currentUser ? (<span className="nav-link" onClick={signOutUser}>SIGN OUT</span>):
-                                ( <Link className="nav-link" to='auth'>Sign In</Link>)
+                            {currentUser ? (<NavLink as={'span'} onClick={signOutUser}>SIGN OUT</NavLink>):
+                                ( <NavLink  to='auth'>Sign In</NavLink>)
                         }
                         <CartIcon />
-                        </div>
-                </div>
+                        </NavLinks>
+                </NavigationContainer>
                 {isOpen && <CartDropdown/>}
             </div>
             <Outlet/>
