@@ -8,7 +8,7 @@ export  const NavigationContainer  = styled.div `
     justify-content: space-between;
     margin-bottom: 25px;
 `    
-export const NavLinks = styled(Link)`
+export const NavLinks = styled.div`
       width: 50%;
       height: 100%;
       display: flex;
