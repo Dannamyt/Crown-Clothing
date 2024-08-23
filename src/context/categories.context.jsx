@@ -20,6 +20,8 @@ useEffect(()=>{
  
  const value= {categoriesMap}
     return(
-        <CategoriesContext.Provider value={value}>{children}</CategoriesContext.Provider>
+        <CategoriesContext.Provider value={value}>
+            {children}
+        </CategoriesContext.Provider>
     )
 }

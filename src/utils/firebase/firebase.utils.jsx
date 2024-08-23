@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth,
+import { 
+    getAuth,
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
@@ -36,7 +37,7 @@ const firebaseConfig = {
     prompt: 'select_account'
   })
 
-  export const auth = getAuth(firebaseApp)
+  export const auth = getAuth()
   export const signInWithGooglePopup = () => signInWithPopup(auth,provider)
   export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider)
   
@@ -67,13 +68,15 @@ export const getCategoriesAndDocuments = async() =>{
   },{})
   return categoryMap
 }
-  export const createUserDocumentFromAuth = async(userAuth,additionalInformation) => {
-      const userDocRef = doc(db,'users',userAuth.uid)
+  export const createUserDocumentFromAuth = async(userAuth,additionalInformation ={}) => {
+      
+    if(!userAuth) return;
+    const userDocRef = doc(db,'users',userAuth.uid)
       console.log(userDocRef)
 
       const userSnapshot = await getDoc(userDocRef)
-      console.log(userSnapshot)
-      console.log(userSnapshot.exists())
+      // console.log(userSnapshot)
+      // console.log(userSnapshot.exists())
 
     if(!userSnapshot.exists()){
       const {displayName, email} = userAuth
@@ -98,15 +101,16 @@ export const getCategoriesAndDocuments = async() =>{
     console.log(email,password)
     return await createUserWithEmailAndPassword(auth,email,password)
   }
-export const signInUserWithEmailAndPassword = async (email,password)=>{
-  if(!email || !password) return
+
+  export const signInUserWithEmailAndPassword = async (email,password)=>{
+  if(!email || !password) return;
   console.log(email,password)
   return await signInWithEmailAndPassword(auth,email,password)
 }
-export const userLogInAuth = async (userAuth,addInfos)=>{
-  const useDocRef = doc(db,'users',userAuth.uid)
-  console.log(useDocRef)
-}
+// export const userLogInAuth = async (userAuth,addInfos)=>{
+//   const useDocRef = doc(db,'users',userAuth.uid)
+//   console.log(useDocRef)
+// }
 
 export const signOutUser= async()=> await signOut(auth)
 
